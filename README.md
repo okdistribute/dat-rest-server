@@ -2,8 +2,6 @@
 
 A rest server for [dat](http://dat-data.com). Parameters to all functions are the same as are expected in the [cli documentation](https://github.com/maxogden/dat/blob/master/docs/cli-docs.md).
 
-[![NPM](https://nodei.co/npm/dat.png?global=true)](https://nodei.co/npm/dat/)
-
 ```
 npm install -g dat-rest-server
 dat-rest-server --port=<port> --path=<path/to/dat>
