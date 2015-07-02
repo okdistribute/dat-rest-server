@@ -1,24 +1,47 @@
 # dat-rest-server
 
-A rest server for [dat](http://dat-data.com). Parameters to all functions are the same as are expected in the [cli documentation](https://github.com/maxogden/dat/blob/master/docs/cli-docs.md)
+A rest server for [dat](http://dat-data.com). Parameters to all functions are the same as are expected in the [cli documentation](https://github.com/maxogden/dat/blob/master/docs/cli-docs.md).
+
+[![NPM](https://nodei.co/npm/dat.png?global=true)](https://nodei.co/npm/dat/)
+
+```
+npm install -g dat-rest-server
+dat-rest-server --port=<port> --path=<path/to/dat>
+```
+
+## clone
+
+Clone dat.
+
+```
+dat clone mydat.place
+```
 
 ## export
 
-Gets data out of dat.
+Gets dat data out.
+
+Optional params: `format`
 
 ```
-GET /export?dataset=<dataset-name>&format=<csv/ndjson>
+GET mydat.place/export/<dataset>
 ```
 
 ## import
 
-Put tabular data in dat.
+Put data in dat.
+
+Optional params: `message`, `format`, `key`.
 
 ```
-POST /import
-{
- "dataset": <dataset-name>,
- "message": <message>,
- "format": <csv/ndjson>
-}
+POST mydat.place/import/<dataset>
+```
+
+Be sure to push data in the request with an appropriate `Content-Type` header:
+
+```
+'json': 'application/json',
+'csv': 'text/csv',
+'ndjson': 'application/x-ndjson',
+'sse': 'text/event-stream'
 ```
