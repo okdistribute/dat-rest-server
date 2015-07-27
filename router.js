@@ -18,6 +18,13 @@ module.exports = function createRouter () {
     res.end(response)
   })
 
+  router.set('/datasets', function (req, res, opts, cb) {
+    opts.db.listDatasets(function (err, datasets) {
+      if (err) abort(err, args)
+      res.end(JSON.stringify(datasets))
+    })
+  })
+
   router.set('/export/:dataset', function (req, res, opts, cb) {
     var args = argparse(req)
     args.dataset = opts.params.dataset
