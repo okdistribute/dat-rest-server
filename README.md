@@ -15,7 +15,7 @@ Clone dat.
 dat clone mydat.com
 ```
 
-## datasets
+## GET datasets list
 
 ```
 GET mydat.com/datasets
@@ -31,14 +31,14 @@ Returns
 ```
 
 
-## export
+## GET datasets
 
 Gets dat data out.
 
 Optional params: `format`
 
 ```
-GET mydat.com/export/sac-crime?format=csv
+GET mydat.com/datasets/<dataset>?format=csv
 ```
 
 Returns
@@ -57,14 +57,14 @@ cdatetime,address,district,beat,grid,crimedescr,ucr_ncic_code,latitude,longitude
 ```
 
 
-## import
+## POST datasets
 
 Put data in dat.
 
 Optional params: `message`, `format`, `key`.
 
 ```
-POST mydat.com/import/sac-crime
+POST mydat.com/datasets/<dataset>
 ```
 
 Be sure to push data in the request with an appropriate `Content-Type` header:

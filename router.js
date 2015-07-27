@@ -25,14 +25,14 @@ module.exports = function createRouter () {
     })
   })
 
-  router.set('/export/:dataset', function (req, res, opts, cb) {
+  router.set('/datasets/:dataset', function (req, res, opts, cb) {
     var args = argparse(req)
     args.dataset = opts.params.dataset
     if (!args.format) args.format = 'ndjson'
     createExportStream(opts.db, args).pipe(res)
   })
 
-  router.set('/import/:dataset', function (req, res, opts, cb) {
+  router.set('/datasets/:dataset', function (req, res, opts, cb) {
     var args = argparse(req)
     args.dataset = opts.params.dataset
     pump(req, createImportStream(opts.db, args), function done (err) {
