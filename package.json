@@ -1,0 +1,22 @@
+{
+  "name": "dat-rest-server",
+  "version": "1.0.0",
+  "description": "A rest server for [dat](http://dat-data.com). Parameters to all functions are the same as are expected in the [cli documentation](https://github.com/maxogden/dat/blob/master/docs/cli-docs.md).",
+  "main": "index.js",
+  "bin": {
+    "dat-rest-server": "cli.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/karissa/dat-rest-server.git"
+  },
+  "author": "Karissa McKelvey <karissa@karissamck.com> (http://karissamck.com/)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/karissa/dat-rest-server/issues"
+  },
+  "homepage": "https://github.com/karissa/dat-rest-server"
+}
