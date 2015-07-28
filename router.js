@@ -29,13 +29,9 @@ module.exports = function createRouter () {
     var args = argparse(req)
     args.dataset = opts.params.dataset
     if (!args.format) args.format = 'ndjson'
-    createExportStream(opts.db, args).pipe(res)
-  })
 
-  router.set('/datasets/:dataset', function (req, res, opts, cb) {
-    var args = argparse(req)
-    args.dataset = opts.params.dataset
-    pump(req, createImportStream(opts.db, args), function done (err) {
+    if (req.method === 'GET') return createExportStream(opts.db, args).pipe(res)
+    else return pump(req, createImportStream(opts.db, args), function done (err) {
       if (err) return cb(err)
       res.end(opts.db.head)
     })

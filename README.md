@@ -1,24 +1,20 @@
 # dat-rest-server
 
-A rest server for [dat](http://dat-data.com). Parameters to all functions are the same as are expected in the [cli documentation](https://github.com/maxogden/dat/blob/master/docs/cli-docs.md).
+A http server for [dat](http://dat-data.com). Parameters to routes are the same as the [cli documentation](https://github.com/maxogden/dat/blob/master/docs/cli-docs.md).
 
 ```
 npm install -g dat-rest-server
 dat-rest-server --port=<port> --path=<path/to/dat>
 ```
 
-## clone
-
-Clone dat.
-
 ```
-dat clone mydat.com
+dat clone mydatserver.com
 ```
 
 ## GET datasets list
 
 ```
-GET mydat.com/datasets
+GET mydatserver.com/datasets
 ```
 
 Returns
@@ -38,7 +34,7 @@ Gets dat data out.
 Optional params: `format`
 
 ```
-GET mydat.com/datasets/<dataset>?format=csv
+GET mydatserver.com/datasets/<dataset>?format=csv
 ```
 
 Returns
@@ -64,7 +60,7 @@ Put data in dat.
 Optional params: `message`, `format`, `key`.
 
 ```
-POST mydat.com/datasets/<dataset>
+POST mydatserver.com/datasets/<dataset>
 ```
 
 Be sure to push data in the request with an appropriate `Content-Type` header:
