@@ -1,7 +1,7 @@
 {
   "name": "dat-rest-server",
   "version": "1.0.1",
-  "description": "A rest server for [dat](http://dat-data.com). Parameters to all functions are the same as are expected in the [cli documentation](https://github.com/maxogden/dat/blob/master/docs/cli-docs.md).",
+  "description": "An http server for [dat](http://dat-data.com).",
   "main": "index.js",
   "bin": {
     "dat-rest-server": "cli.js"
