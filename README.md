@@ -7,11 +7,13 @@ npm install -g dat-rest-server
 dat-rest-server --port=<port> --path=<path/to/dat>
 ```
 
+## POST /
+
 ```
 dat clone mydatserver.com
 ```
 
-## GET datasets list
+## GET /datasets
 
 ```
 GET mydatserver.com/datasets
@@ -26,8 +28,27 @@ Returns
 ]
 ```
 
+## GET /changes
 
-## GET datasets
+Gets changes from dat
+
+Optional params: `live`
+
+```
+GET mydatserver.com/changes?live=true
+```
+
+Returns
+
+```
+"root":true,"change":1,"date":"2015-09-01T20:47:40.582Z","version":"3ffbf6b75e57a934024c47e747390732bb0b8210310b037bb4974b5529820ea9","message":"","links":[],"puts":0,"deletes":0,"files":0}
+{"root":false,"change":2,"date":"2015-09-01T20:47:40.590Z","version":"dbf404f13567d5dd727534b80816b1b95211523611410024bafb53a3831f0f18","message":"","links":["3ffbf6b75e57a934024c47e747390732bb0b8210310b037bb4974b5529820ea9"],"puts":1,"deletes":0,"files":1}
+{"root":false,"change":3,"date":"2015-09-01T20:47:45.274Z","version":"969be9bd7e4670633e1b8412f9617311c80b6e3aec6d6013de15b705292fcb28","message":"","links":["dbf404f13567d5dd727534b80816b1b95211523611410024bafb53a3831f0f18"],"puts":1342,"deletes":0,"files":0}
+{"root":false,"change":4,"date":"2015-09-01T22:52:45.479Z","version":"2e8cd3a9578e9a5281768d8a7625adc2c7e99d60660fde5a8807205240d89601","message":"","links":["969be9bd7e4670633e1b8412f9617311c80b6e3aec6d6013de15b705292fcb28"],"puts":1,"deletes":0,"files":1}
+{"root":false,"change":5,"date":"2015-09-01T22:53:17.775Z","version":"a2c77bedfb59f2237825614b57109ef35e097f5b1bf9320e9a52ef90768d566a","message":"complete->completed","links":["2e8cd3a9578e9a5281768d8a7625adc2c7e99d60660fde5a8807205240d89601"],"puts":1342,"deletes":0,"files":0}
+```
+
+## GET /datasets/:dataset
 
 Gets dat data out.
 
@@ -53,7 +74,7 @@ cdatetime,address,district,beat,grid,crimedescr,ucr_ncic_code,latitude,longitude
 ```
 
 
-## POST datasets
+## POST /datasets/:dataset
 
 Put data in dat.
 
@@ -71,3 +92,4 @@ Be sure to push data in the request with an appropriate `Content-Type` header:
 'ndjson': 'application/x-ndjson',
 'sse': 'text/event-stream'
 ```
+
