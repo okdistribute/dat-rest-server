@@ -35,6 +35,14 @@ module.exports = function (args) {
           res.end(err.message);
         }
       })
+
+      server.on('connection', function (socket) {
+        socket.setNoDelay(true) // http://neophob.com/2013/09/rpc-calls-and-mysterious-40ms-delay/
+      })
+
+      // keep connections open for a long time (for e.g. --live)
+      server.setTimeout(86400)
+
       server.listen(port)
     })
   }
