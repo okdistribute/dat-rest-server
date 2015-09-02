@@ -7,16 +7,23 @@ var ndjson = require('ndjson')
 var url = require('url')
 var createExportStream = require('dat/lib/export.js')
 var createImportStream = require('dat/lib/import.js')
+var route = require('dat/lib/serve.js')
 
 module.exports = function createRouter () {
   var router = Router()
 
   router.set('/', function (req, res, opts, cb) {
-    if (req.method === 'POST') {
-      pump(req, opts.readonly ? opts.db.push() : opts.db.replicate(), res)
+    if (req.method === 'GET') {
+      route.information(opts.db, opts, function (err, data) {
+        if (err) return res.end(err)
+        res.setHeader('content-type', 'application/json')
+        res.end(data)
+      })
+    } else if (req.method === 'POST') {
+      return pump(req, route.replication(opts.db, opts), res)
     } else {
       res.statuscode = 405
-      res.end('use POST for replication')
+      res.end()
     }
   })
 
