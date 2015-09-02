@@ -6,8 +6,36 @@ A http server for [dat](http://dat-data.com). Parameters to routes are the same 
 npm install -g dat-rest-server
 dat-rest-server --port=<port> --path=<path/to/dat>
 ```
+## GET /
+
+Gets basic information about the state of the dat
+
+```
+{
+  dat: true,
+  version: "7.0.4",
+  status: {
+    head: "a2c77bedfb59f2237825614b57109ef35e097f5b1bf9320e9a52ef90768d566a",
+    transaction: false,
+    checkout: false,
+    modified: "2015-09-01T22:53:17.775Z",
+    datasets: 3,
+    rows: 2686,
+    files: 2,
+    versions: 4,
+    size: 1704743
+  },
+  datasets: [
+    "organisms2",
+    "organisms",
+    "files"
+  ]
+}
+```
 
 ## POST /
+
+Used for replication during clone:
 
 ```
 dat clone mydatserver.com
