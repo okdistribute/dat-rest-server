@@ -4,7 +4,7 @@ var getport = require('getport')
 
 var createRouter = require('./router.js')
 
-module.exports = function (args) {
+module.exports = function (args, cb) {
   if (args.port) return serve(parseInt(args.port, 10))
   if (!args.path) args.path = '.'
 
@@ -44,6 +44,7 @@ module.exports = function (args) {
       server.setTimeout(86400)
 
       server.listen(port)
+      cb(server, port)
     })
   }
 }
