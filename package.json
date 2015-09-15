@@ -1,6 +1,6 @@
 {
   "name": "dat-rest-server",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "An http server for [dat](http://dat-data.com).",
   "main": "index.js",
   "bin": {
