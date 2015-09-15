@@ -76,7 +76,45 @@ Returns
 {"root":false,"change":5,"date":"2015-09-01T22:53:17.775Z","version":"a2c77bedfb59f2237825614b57109ef35e097f5b1bf9320e9a52ef90768d566a","message":"complete->completed","links":["2e8cd3a9578e9a5281768d8a7625adc2c7e99d60660fde5a8807205240d89601"],"puts":1342,"deletes":0,"files":0}
 ```
 
-## GET /datasets/:dataset
+## GET /files
+
+Get file list from dat.
+
+```
+GET mydatserver.com/files
+```
+
+```
+{
+  files: [
+    "/Users/karissa/Dropbox/throwaway/bug.mov",
+    "asdf",
+    "black_crappie.json",
+    "bug.mov",
+    "fishing/black_crappie.json",
+    "fishing/yellow_perch.json",
+    "package.json"
+  ]
+}
+```
+
+## GET /files/:name
+
+Get file contents with the given name
+
+```
+GET mydatserver.com/files/package.json
+```
+
+```
+{
+  name: "Hunting-and-Fishing",
+  publisher: "waldoj",
+  description: "Hunting-and-Fishing"
+}
+```
+
+## GET /datasets/:name
 
 Gets dat data out.
 

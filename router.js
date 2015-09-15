@@ -7,6 +7,7 @@ var ndjson = require('ndjson')
 var url = require('url')
 var createExportStream = require('dat/lib/export.js')
 var createImportStream = require('dat/lib/import.js')
+var listFilesStream = require('dat/lib/files.js')
 var route = require('dat/lib/serve.js')
 
 module.exports = function createRouter () {
@@ -38,6 +39,28 @@ module.exports = function createRouter () {
     return pump(opts.db.createChangesStream(args), ndjson.serialize(), res, function (err) {
       if (err) throw err
     })
+  })
+
+  router.set('/files', function (req, res, opts, cb) {
+    var limit = opts.limit
+    if (limit) {
+      if (opts.limit) opts.limit = parseInt(limit, 10)
+    }
+    opts.dataset = opts.dataset || 'files'
+    opts.json = true
+
+    var filesStream = listFilesStream(opts.db, opts)
+    return pump(filesStream, res, function (err) {
+      if (err) throw err
+    })
+  })
+
+  router.set('/files/:key', function (req, res, opts, cb) {
+    opts.dataset = opts.dataset || 'files'
+    if (req.method === 'GET') {
+      var reader = opts.db.createFileReadStream(opts.params.key, opts)
+      pump(reader, res)
+    } else res.end('POST not supported yet.')
   })
 
   router.set('/datasets', function (req, res, opts, cb) {
