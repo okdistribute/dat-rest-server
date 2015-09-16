@@ -5,8 +5,11 @@ var getport = require('getport')
 var createRouter = require('./router.js')
 
 module.exports = function (args, cb) {
-  if (args.port) return serve(parseInt(args.port, 10))
   if (!args.path) args.path = '.'
+  if (args.port) {
+    serve(parseInt(args.port, 10))
+    return
+  }
 
   getport(6442, function (err, port) {
     if (err) throw err
@@ -43,7 +46,6 @@ module.exports = function (args, cb) {
       // keep connections open for a long time (for e.g. --live)
       server.setTimeout(86400)
 
-      server.listen(port)
       cb(server, port)
     })
   }
