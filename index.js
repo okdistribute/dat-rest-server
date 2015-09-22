@@ -5,24 +5,20 @@ var getport = require('getport')
 var createRouter = require('./router.js')
 
 module.exports = function (args, cb) {
-  if (!args.path) args.path = '.'
-  if (args.port) {
-    serve(parseInt(args.port, 10))
-    return
-  }
+  if (!args.path) args.path = process.cwd()
+  if (args.port) return serve(parseInt(args.port, 10))
 
   getport(6442, function (err, port) {
     if (err) throw err
     return serve(port)
   })
 
-
   function serve (port) {
     var router = createRouter()
 
     openDat(args, function (err, db) {
-      if (err) throw err
-      if (!port) throw new Error('Invalid port: ' + port)
+      if (err) return cb(err)
+      if (!port) return cb(new Error('Invalid port: ' + port))
 
       console.log('Listening on port ' + port)
 
@@ -34,6 +30,7 @@ module.exports = function (args, cb) {
         }
 
         function onError (err) {
+          console.trace(err)
           res.statusCode = err.statusCode || 500;
           res.end(err.message);
         }

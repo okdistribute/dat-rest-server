@@ -15,10 +15,10 @@ module.exports = function createRouter () {
 
   router.set('/', function (req, res, opts, cb) {
     if (req.method === 'GET') {
-      route.information(opts.db, opts, function (err, data) {
-        if (err) return res.end(err)
+      route.information(opts.db, opts, function (err, str) {
+        if (err) return cb(err)
         res.setHeader('content-type', 'application/json')
-        res.end(data)
+        res.end(str)
       })
     } else if (req.method === 'POST') {
       return pump(req, route.replication(opts.db, opts), res)
@@ -35,10 +35,8 @@ module.exports = function createRouter () {
 
   router.set('/changes', function (req, res, opts, cb) {
     var args = argparse(req)
-    args.values = true
-    return pump(opts.db.createChangesStream(args), ndjson.serialize(), res, function (err) {
-      if (err) throw err
-    })
+    if (args.values === undefined) args.values = true
+    return pump(opts.db.createChangesStream(args), ndjson.serialize(), res)
   })
 
   router.set('/files', function (req, res, opts, cb) {
@@ -65,7 +63,7 @@ module.exports = function createRouter () {
 
   router.set('/datasets', function (req, res, opts, cb) {
     opts.db.listDatasets(function (err, datasets) {
-      if (err) abort(err, args)
+      if (err) return cb(err)
       res.end(JSON.stringify(datasets))
     })
   })
